@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    padding: 3rem;
+    user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+#board td {
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    border: 1px solid black;
+}
+#board td:hover {
+    background-color: lightblue;
+}
+
+#board [box-cell="0"],
+#board [box-cell="1"],
+#board [box-cell="2"] {
+    border-top: 3px solid black;
+}
+
+#board [box-cell="2"],
+#board [box-cell="5"],
+#board [box-cell="8"] {
+    border-right: 3px solid black;
+}
+
+#board [box-cell="6"],
+#board [box-cell="7"],
+#board [box-cell="8"] {
+    border-bottom: 3px solid black;
+}
+
+#board [box-cell="0"],
+#board [box-cell="3"],
+#board [box-cell="6"] {
+    border-left: 3px solid black;
+}
