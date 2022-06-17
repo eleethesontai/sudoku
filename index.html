@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sudoku</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            td::after {
+                content: attr(box-cell);
+            }
+        </style>
+    </head>
+    <body>
+        <table id="board">
+            <tbody>
+                <tr>
+                    <td row="0" col="0" box="0" box-cell="0"></td>
+                    <td row="0" col="1" box="0" box-cell="1"></td>
+                    <td row="0" col="2" box="0" box-cell="2"></td>
+                    <td row="0" col="3" box="1" box-cell="0"></td>
+                    <td row="0" col="4" box="1" box-cell="1"></td>
+                    <td row="0" col="5" box="1" box-cell="2"></td>
+                    <td row="0" col="6" box="2" box-cell="0"></td>
+                    <td row="0" col="7" box="2" box-cell="1"></td>
+                    <td row="0" col="8" box="2" box-cell="2"></td>
+                </tr>
+                <tr>
+                    <td row="1" col="0" box="0" box-cell="3"></td>
+                    <td row="1" col="1" box="0" box-cell="4"></td>
+                    <td row="1" col="2" box="0" box-cell="5"></td>
+                    <td row="1" col="3" box="1" box-cell="3"></td>
+                    <td row="1" col="4" box="1" box-cell="4"></td>
+                    <td row="1" col="5" box="1" box-cell="5"></td>
+                    <td row="1" col="6" box="2" box-cell="3"></td>
+                    <td row="1" col="7" box="2" box-cell="4"></td>
+                    <td row="1" col="8" box="2" box-cell="5"></td>
+                </tr>
+                <tr>
+                    <td row="2" col="0" box="0" box-cell="6"></td>
+                    <td row="2" col="1" box="0" box-cell="7"></td>
+                    <td row="2" col="2" box="0" box-cell="8"></td>
+                    <td row="2" col="3" box="1" box-cell="6"></td>
+                    <td row="2" col="4" box="1" box-cell="7"></td>
+                    <td row="2" col="5" box="1" box-cell="8"></td>
+                    <td row="2" col="6" box="2" box-cell="6"></td>
+                    <td row="2" col="7" box="2" box-cell="7"></td>
+                    <td row="2" col="8" box="2" box-cell="8"></td>
+                </tr>
+                <tr>
+                    <td row="3" col="0" box="3" box-cell="0"></td>
+                    <td row="3" col="1" box="3" box-cell="1"></td>
+                    <td row="3" col="2" box="3" box-cell="2"></td>
+                    <td row="3" col="3" box="4" box-cell="0"></td>
+                    <td row="3" col="4" box="4" box-cell="1"></td>
+                    <td row="3" col="5" box="4" box-cell="2"></td>
+                    <td row="3" col="6" box="5" box-cell="0"></td>
+                    <td row="3" col="7" box="5" box-cell="1"></td>
+                    <td row="3" col="8" box="5" box-cell="2"></td>
+                </tr>
+                <tr>
+                    <td row="4" col="0" box="3" box-cell="3"></td>
+                    <td row="4" col="1" box="3" box-cell="4"></td>
+                    <td row="4" col="2" box="3" box-cell="5"></td>
+                    <td row="4" col="3" box="4" box-cell="3"></td>
+                    <td row="4" col="4" box="4" box-cell="4"></td>
+                    <td row="4" col="5" box="4" box-cell="5"></td>
+                    <td row="4" col="6" box="5" box-cell="3"></td>
+                    <td row="4" col="7" box="5" box-cell="4"></td>
+                    <td row="4" col="8" box="5" box-cell="5"></td>
+                </tr>
+                <tr>
+                    <td row="5" col="0" box="3" box-cell="6"></td>
+                    <td row="5" col="1" box="3" box-cell="7"></td>
+                    <td row="5" col="2" box="3" box-cell="8"></td>
+                    <td row="5" col="3" box="4" box-cell="6"></td>
+                    <td row="5" col="4" box="4" box-cell="7"></td>
+                    <td row="5" col="5" box="4" box-cell="8"></td>
+                    <td row="5" col="6" box="5" box-cell="6"></td>
+                    <td row="5" col="7" box="5" box-cell="7"></td>
+                    <td row="5" col="8" box="5" box-cell="8"></td>
+                </tr>
+                <tr>
+                    <td row="6" col="0" box="6" box-cell="0"></td>
+                    <td row="6" col="1" box="6" box-cell="1"></td>
+                    <td row="6" col="2" box="6" box-cell="2"></td>
+                    <td row="6" col="3" box="7" box-cell="0"></td>
+                    <td row="6" col="4" box="7" box-cell="1"></td>
+                    <td row="6" col="5" box="7" box-cell="2"></td>
+                    <td row="6" col="6" box="8" box-cell="0"></td>
+                    <td row="6" col="7" box="8" box-cell="1"></td>
+                    <td row="6" col="8" box="8" box-cell="2"></td>
+                </tr>
+                <tr>
+                    <td row="7" col="0" box="6" box-cell="3"></td>
+                    <td row="7" col="1" box="6" box-cell="4"></td>
+                    <td row="7" col="2" box="6" box-cell="5"></td>
+                    <td row="7" col="3" box="7" box-cell="3"></td>
+                    <td row="7" col="4" box="7" box-cell="4"></td>
+                    <td row="7" col="5" box="7" box-cell="5"></td>
+                    <td row="7" col="6" box="8" box-cell="3"></td>
+                    <td row="7" col="7" box="8" box-cell="4"></td>
+                    <td row="7" col="8" box="8" box-cell="5"></td>
+                </tr>
+                <tr>
+                    <td row="8" col="0" box="6" box-cell="6"></td>
+                    <td row="8" col="1" box="6" box-cell="7"></td>
+                    <td row="8" col="2" box="6" box-cell="8"></td>
+                    <td row="8" col="3" box="7" box-cell="6"></td>
+                    <td row="8" col="4" box="7" box-cell="7"></td>
+                    <td row="8" col="5" box="7" box-cell="8"></td>
+                    <td row="8" col="6" box="8" box-cell="6"></td>
+                    <td row="8" col="7" box="8" box-cell="7"></td>
+                    <td row="8" col="8" box="8" box-cell="8"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
