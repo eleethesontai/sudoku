@@ -8,8 +8,46 @@
                 padding: 0;
                 box-sizing: border-box;
             }
-            td::after {
+            body {
+                height: 100vh;
+                width: 100vw;
+                padding: 1rem;
+            }
+            #board {
+                border-collapse: collapse;
+            }
+            #board td {
+                width: 3rem;
+                height: 3rem;
+                text-align: center;
+                border: 1px solid rebeccapurple;
+            }
+            #board td:hover {
+                background-color: steelblue;
+            }
+            #board td::after {
                 content: attr(box-cell);
+            }
+
+            #board [box-cell="0"],
+            #board [box-cell="1"],
+            #board [box-cell="2"] {
+                border-top: 2px solid black;
+            }
+            #board [box-cell="2"],
+            #board [box-cell="5"],
+            #board [box-cell="8"] {
+                border-right: 2px solid black;
+            }
+            #board [box-cell="6"],
+            #board [box-cell="7"],
+            #board [box-cell="8"] {
+                border-bottom: 2px solid black;
+            }
+            #board [box-cell="0"],
+            #board [box-cell="3"],
+            #board [box-cell="6"] {
+                border-left: 2px solid black;
             }
         </style>
     </head>
