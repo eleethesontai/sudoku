@@ -1,3 +1,5 @@
+// script to test the 50 puzzles in the pe96 to make sure the solve method is working
+
 const fs = require("fs")
 const sudoku = require("./sudoku")
 
@@ -12,4 +14,6 @@ const puzzles = results.map(result => {
         })
 })
 
-console.log(puzzles[0])
+puzzles.forEach(puzzle => {
+    console.log(sudoku.solve(puzzle))
+})

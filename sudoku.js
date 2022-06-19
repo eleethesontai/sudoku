@@ -3,7 +3,7 @@ function solve(puzzle) {
     for(r=0;r<9;r++) {
         for(c=0;c<9;c++) {
             
-            if(puzzle[r][c]==0) {
+            if(puzzle[r][c]===0) {
 
                 for(n=1;n<9;n++) {
                     if(isValid(puzzle,n,r,c)) {
