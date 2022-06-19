@@ -27,6 +27,10 @@ function solve(puzzle) {
 
 }
 
+function generate() {
+    
+}
+
 function isValid(p,n,r,c) {
 
     inRow = false
@@ -52,5 +56,6 @@ function isValid(p,n,r,c) {
 }
 
 module.exports = {
-    solve: solve
+    solve: solve,
+    generate: generate
 }
