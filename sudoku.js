@@ -95,8 +95,23 @@ function emptyPuzzle() {
 do {        
     let puzzle = emptyPuzzle()
     try {
-        result = generate(puzzle)
+        console.log(generate(puzzle))
     } catch(e) {
         printPuzzle(puzzle)
     }
 } while(1==1)
+
+/* debug notes
+
+so it works when it fails and not when it succeeds and it fails when it succeeds? #wtf
+what could cause such a thing?
+
+hack? i guess for now i just reverse the return and figure it out later?
+
+*/
+
+/* psuedocode
+
+
+
+*/
