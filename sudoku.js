@@ -1,4 +1,4 @@
-function generate(puzzle) {
+function _generate(puzzle) {
     
     for(row=0;row<9;row++) {
         for(col=0;col<9;col++) {
@@ -9,7 +9,7 @@ function generate(puzzle) {
                 random.forEach(n => {
                     if(isValid(puzzle,n,row,col)) {
                         puzzle[row][col] = n
-                        if(generate(puzzle)) {
+                        if(_generate(puzzle)) {
                             return true
                         } else {
                             puzzle[row][col] = 0
@@ -66,7 +66,7 @@ function printPuzzle(puzzle) {
 }
 function r9() {
 
-    result = []
+    let result = []
 
     while (result.length<9) {
         r = Math.floor(Math.random()*9+1)
@@ -92,26 +92,18 @@ function emptyPuzzle() {
     ]
 }
 
-do {        
-    let puzzle = emptyPuzzle()
-    try {
-        console.log(generate(puzzle))
-    } catch(e) {
-        printPuzzle(puzzle)
-    }
-} while(1==1)
+function generate() {
+    do {
+        let puzzle = emptyPuzzle()
+        try {
+            let result = _generate(puzzle)
+        } catch {
+            return puzzle
+        }
+    } while (1==1)
+}
 
-/* debug notes
+let puzzle = generate()
+printPuzzle(puzzle)
 
-so it works when it fails and not when it succeeds and it fails when it succeeds? #wtf
-what could cause such a thing?
-
-hack? i guess for now i just reverse the return and figure it out later?
-
-*/
-
-/* psuedocode
-
-
-
-*/
+//so it works when it fails and not when it succeeds and it fails when it succeeds? #wtf
