@@ -1,3 +1,52 @@
+function solve(puzzle) {
+
+    for(r=0;r<9;r++) {
+        for(c=0;c<9;c++) {
+            
+            if(puzzle[r][c]===0) {
+
+                for(n=1;n<9;n++) {
+                    if(isValid(puzzle,n,r,c)) {
+                        
+                        puzzle[r][c]=n
+                        if(solve(puzzle)) {
+                            return true
+                        } else {
+                            puzzle[r][c]=0 
+                        }
+
+                    }
+                }
+
+                return false
+
+            }
+
+        }
+    }
+
+    return true
+
+}
+
+function generate() {
+
+    do {
+        let puzzle = getEmptyPuzzle()
+        try {
+            let result = _generate(puzzle)
+        } catch {
+            return puzzle
+        }
+    } while (1==1)
+
+}
+
+let puzzle = generate()
+printPuzzle(puzzle)
+
+/* Helper Functions */
+
 function _generate(puzzle) {
     
     for(row=0;row<9;row++) {
@@ -5,7 +54,7 @@ function _generate(puzzle) {
 
             if(puzzle[row][col]===0) {
 
-                let random = r9()
+                let random = random9()
                 random.forEach(n => {
                     if(isValid(puzzle,n,row,col)) {
                         puzzle[row][col] = n
@@ -27,31 +76,32 @@ function _generate(puzzle) {
     return true
 
 }
+function _randomize(n) {  
+}
 
-function isValid(puzzle,number,row,col) {
+function isValid(p,n,r,c) {
 
-    let inRow = false
-    let inCol = false
-    let inBox = false
+    inRow = false
+    inCol = false
+    inBox = false
 
     for(i=0; i<9; i++) {
-        if(puzzle[row][i] === number) {inRow=true}
-        if(puzzle[i][col] === number) {inCol=true}
+        if(p[r][i]===n) {inRow=true}
+        if(p[i][c]===n) {inCol=true}
     }
 
-    let boxRow = row-row%3
-    let boxCol = col-col%3
+    boxRow=r-r%3
+    boxCol=c-c%3
 
-    for(r=boxRow;r<boxRow+3;r++) {
-        for(c=boxCol;c<boxCol+3;c++) {
-            if(puzzle[r][c] === number ) {inBox=true}
+    for(x=boxRow;x<boxRow+3;x++) {
+        for(y=boxCol;y<boxCol+3;y++) {
+            if(p[x][y]===n) {inBox=true}
         }
     }
 
     return !inRow && !inCol && !inBox
 
 }
-
 function printPuzzle(puzzle) {
     process.stdout.write("\n")
     for(row=0;row<9;row++) {
@@ -64,9 +114,9 @@ function printPuzzle(puzzle) {
     }
     process.stdout.write("\n")
 }
-function r9() {
+function random9() {
 
-    let result = []
+    result = []
 
     while (result.length<9) {
         r = Math.floor(Math.random()*9+1)
@@ -78,7 +128,7 @@ function r9() {
     return result
 
 }
-function emptyPuzzle() {
+function getEmptyPuzzle() {
     return [
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0],
@@ -91,19 +141,3 @@ function emptyPuzzle() {
         [0,0,0,0,0,0,0,0,0]
     ]
 }
-
-function generate() {
-    do {
-        let puzzle = emptyPuzzle()
-        try {
-            let result = _generate(puzzle)
-        } catch {
-            return puzzle
-        }
-    } while (1==1)
-}
-
-let puzzle = generate()
-printPuzzle(puzzle)
-
-//so it works when it fails and not when it succeeds and it fails when it succeeds? #wtf
