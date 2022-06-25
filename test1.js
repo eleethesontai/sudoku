@@ -1,16 +1,8 @@
-function fillRandom(min, max, count) {
-    
-    let result = []
+// test to clone array
 
-    while (result.length<count) {
-        random = Math.floor(Math.random() * (max - min + 1) + min)
-        if(!result.includes(random)) {
-            result.push(random)
-        }
-    }
+let first = [1,2,3]
+let second = first.slice(0)
 
-    return result
+second[0]=7
 
-}
-
-console.log(fillRandom(1,9,9)) 
+console.log(first,second)

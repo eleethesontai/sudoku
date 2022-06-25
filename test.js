@@ -9,8 +9,7 @@ function generate() {
         result = _generate(puzzle)
         result = solve(puzzle)
 
-        puzzle = _randomize(puzzle)
-        result = solve(puzzle)
+        puzzle = _randomize(puzzle,60)
 
     } while(!result)
 
@@ -54,10 +53,30 @@ printPuzzle(puzzle)
 /* Helper Functions */
 function _randomize(puzzle, count=17) {
 
+    let result = false
     
+    while (!result) {
+
+        // list of randoms
+
+    }
 
     return puzzle
 
+    // let random = getRandom(0,80,count)
+
+    // for(i=0;i<count;i++) {
+    //     let rc = i2rc(random[i])
+    //     puzzle[rc.r][rc.c] = 0
+    // }
+
+    // return puzzle
+
+}
+function i2rc(i) {
+    c = i%9
+    r = (i-c)/9
+    return {r,c}
 }
 function _generate(puzzle) {
     
