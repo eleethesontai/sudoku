@@ -2,7 +2,7 @@ function generate() {
 
     let puzzle = getEmptyPuzzle()
     let result = _generate(puzzle)
-    let randomized = _randomize(puzzle)
+    let randomized = _randomize(puzzle, 50)
 
     return randomized
 
