@@ -1,3 +1,63 @@
+function generate() {
+
+    let puzzle = getEmptyPuzzle()
+    let result = _generate(puzzle)
+
+    return puzzle
+
+}
+function _generate(puzzle) {
+
+    puzzle = puzzle || getEmptyPuzzle()
+
+    for(let row=0; row<9; row++) {
+        for(let col=0; col<9; col++) {
+
+            if(puzzle[row][col]===0) {
+                
+                let random = _random(1,9,9)
+
+                for(let i=0; i<9; i++) {
+
+                    if(isValidPlacement(puzzle,random[i],row,col)) {
+                       
+                        puzzle[row][col] = random[i]
+                        
+                        if(_generate(puzzle)) {
+                            return true
+                        } else {
+                            puzzle[row][col] = 0
+                        }
+
+                    }
+
+                }
+
+                return false
+                
+            }
+
+        }
+    }
+
+    return true
+
+}
+function _random(min, max, count) {
+
+    let result = []
+
+    while (result.length<count) {
+        let rand = Math.floor(Math.random() * (max - min + 1) + min)
+        if(!result.includes(rand)) {
+            result.push(rand)
+        }
+    }
+
+    return result
+
+}
+
 function solve(puzzle) {
 
     for(let row=0; row<9; row++) {
@@ -31,6 +91,7 @@ function solve(puzzle) {
     return true
 
 }
+
 function isValidPlacement(puzzle, number, row, col) {
 
     for(let i=0; i<9; i++) {
@@ -62,5 +123,42 @@ function printPuzzle(puzzle) {
     }
     process.stdout.write("\n")
 }
+function getEmptyPuzzle() {
+    return [
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0]
+    ]
+}
 
-/* main */
+/********************************************************************/
+
+function test1() {
+
+    let max = 100000
+    let start = new Date()
+
+    for(let i=0; i<max; i++) {
+        let puzzle = generate()
+        let result = solve(puzzle)
+        if (!result) console.log(result)
+    }
+
+    let end = new Date()
+    let diff = end-start
+
+    console.log(diff/1000.0, diff/max)
+
+}
+
+function main() {
+    let result = generate()
+    printPuzzle(result)
+}
+main()
