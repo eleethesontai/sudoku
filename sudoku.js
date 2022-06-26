@@ -2,8 +2,10 @@ function generate() {
 
     let puzzle = getEmptyPuzzle()
     let result = _generate(puzzle)
+    if (!result) console.log('#wtf @ l5')
+    let randomized = _randomize(puzzle)
 
-    return puzzle
+    return randomized
 
 }
 function _generate(puzzle) {
@@ -41,6 +43,24 @@ function _generate(puzzle) {
     }
 
     return true
+
+}
+function _randomize(puzzle, count=17) {
+
+    do {
+        
+        let random = _random(0,80,count)
+        
+        for(let i=0; i<81; i++) {
+            let rand = random[i]
+            let row = 0
+            let col = 0
+            puzzle[row][col] = 0
+        }
+
+        let result = solve(puzzle) // problem is that solve is set up to fill in the blanks?
+
+    } while(1==1)
 
 }
 function _random(min, max, count) {
@@ -135,26 +155,6 @@ function getEmptyPuzzle() {
         [0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0]
     ]
-}
-
-/********************************************************************/
-
-function test1() {
-
-    let max = 100000
-    let start = new Date()
-
-    for(let i=0; i<max; i++) {
-        let puzzle = generate()
-        let result = solve(puzzle)
-        if (!result) console.log(result)
-    }
-
-    let end = new Date()
-    let diff = end-start
-
-    console.log(diff/1000.0, diff/max)
-
 }
 
 function main() {
