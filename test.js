@@ -9,7 +9,7 @@ function generate() {
         result = _generate(puzzle)
         result = solve(puzzle)
 
-        puzzle = _randomize(puzzle,60)
+        // puzzle = _randomize(puzzle,60)
 
     } while(!result)
 
@@ -55,22 +55,15 @@ function _randomize(puzzle, count=17) {
 
     let result = false
     
-    while (!result) {
+    while(!result) {
 
-        // list of randoms
+        // get random cells
+        // zero cells
+        // solve
 
     }
 
     return puzzle
-
-    // let random = getRandom(0,80,count)
-
-    // for(i=0;i<count;i++) {
-    //     let rc = i2rc(random[i])
-    //     puzzle[rc.r][rc.c] = 0
-    // }
-
-    // return puzzle
 
 }
 function i2rc(i) {
