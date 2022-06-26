@@ -1,26 +1,4 @@
-function solve(puzzle) {
-    let puzzle1 = puzzle.map(r => {return r.slice(0)})
-    for(r=0;r<9;r++) {
-        for(c=0;c<9;c++) {
-            if(puzzle1[r][c]===0) {
-                for(n=1;n<9;n++) {
-                    if(isValid(puzzle1,n,r,c)) {
-                        puzzle1[r][c]=n
-                        if(solve(puzzle1)) {
-                            return true
-                        } else {
-                            puzzle1[r][c]=0 
-                        }
-                    }
-                }
-                return false
-            }
-        }
-    }
-    return true
-}
-
-let puzzle = [
+test = [
     [8,0,6,0,1,0,0,0,0],
     [0,0,3,0,6,4,0,9,0],
     [9,0,0,0,0,0,8,1,6],
@@ -32,29 +10,56 @@ let puzzle = [
     [0,0,0,0,2,0,1,0,5]
 ]
 
-printPuzzle(result, puzzle)
+function solve(puzzle) {
 
-function isValid(p,n,r,c) {
+    for(let row=0; row<9; row++) {
+        for(let col=0; col<9; col++) {
 
-    inRow = false
-    inCol = false
-    inBox = false
+            if(puzzle[row][col]===0) {
 
-    for(i=0; i<9; i++) {
-        if(p[r][i]===n) {inRow=true}
-        if(p[i][c]===n) {inCol=true}
-    }
+                for(let num=1; num<=9; num++) {
 
-    boxRow=r-r%3
-    boxCol=c-c%3
+                    if(isValidPlacement(puzzle, num, row, col)) {
 
-    for(x=boxRow;x<boxRow+3;x++) {
-        for(y=boxCol;y<boxCol+3;y++) {
-            if(p[x][y]===n) {inBox=true}
+                        puzzle[row][col]=num
+
+                        if(solve(puzzle)) {
+                            return true
+                        } else {
+                            puzzle[row][col]=0
+                        }
+
+                    }
+
+                }
+
+                return false
+
+            }
+
         }
     }
 
-    return !inRow && !inCol && !inBox
+    return true
+
+}
+function isValidPlacement(puzzle, number, row, col) {
+
+    for(let i=0; i<9; i++) {
+        if (puzzle[row][i]===number) return false
+        if (puzzle[i][col]===number) return false
+    }
+
+    boxRow=row-row%3
+    boxCol=col-col%3
+
+    for(x=boxRow;x<boxRow+3;x++) {
+        for(y=boxCol;y<boxCol+3;y++) {
+            if(puzzle[x][y]===number) return false
+        }
+    }
+
+    return true
 
 }
 function printPuzzle(puzzle) {
@@ -69,3 +74,21 @@ function printPuzzle(puzzle) {
     }
     process.stdout.write("\n")
 }
+
+/* main */
+
+// test = [
+//     [8,5,6,9,1,7,4,2,3],
+//     [2,1,3,8,6,4,5,9,7],
+//     [9,4,7,2,3,5,8,1,6],
+//     [1,8,5,3,9,6,7,4,2],
+//     [7,6,2,1,4,8,3,5,9],
+//     [3,9,4,5,7,2,6,8,1],
+//     [5,2,1,6,8,3,9,7,4],
+//     [4,3,9,7,5,1,2,6,8],
+//     [6,7,8,4,2,9,1,3,5]
+// ]
+
+let result = solve(test)
+console.log(result)
+printPuzzle(test)
