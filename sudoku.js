@@ -28,7 +28,6 @@ function solve(puzzle) {
     return true
 
 }
-
 function generate() {
 
     do {
@@ -41,12 +40,10 @@ function generate() {
     } while (1==1)
 
 }
-
 let puzzle = generate()
 printPuzzle(puzzle)
 
 /* Helper Functions */
-
 function _generate(puzzle) {
     
     for(row=0;row<9;row++) {
