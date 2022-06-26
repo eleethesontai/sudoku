@@ -2,7 +2,6 @@ function generate() {
 
     let puzzle = getEmptyPuzzle()
     let result = _generate(puzzle)
-    if (!result) console.log('#wtf @ l5')
     let randomized = _randomize(puzzle)
 
     return randomized
@@ -51,14 +50,16 @@ function _randomize(puzzle, count=17) {
         
         let random = _random(0,80,count)
         
-        for(let i=0; i<81; i++) {
+        for(let i=0; i<count; i++) {
             let rand = random[i]
-            let row = 0
-            let col = 0
+            let row = (rand-(rand%9))/9
+            let col = rand%9
             puzzle[row][col] = 0
         }
 
-        let result = solve(puzzle) // problem is that solve is set up to fill in the blanks?
+        let testing = puzzle.map(r=>r.slice(0))
+        let result = solve(testing)
+        if(result) return puzzle
 
     } while(1==1)
 
