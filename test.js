@@ -4,21 +4,29 @@ function solve(puzzle) {
         for(let col=0; col<9; col++) {
            
             if (puzzle[row][col]===0) {
-
+                
                 for(let num=1; num<=9; num++) {
                     if(isValidPlacement(puzzle,num,row,col)) {
-                        
+
+                        puzzle[row][col]=num
+
+                        if (solve(puzzle)) {
+                            return true
+                        } else {
+                            puzzle[row][col]=0
+                        }
+
                     }
                 }
 
-                // what to do here? this blank is not matchable if here.
+                return false
 
             }
 
         }
     }
 
-    // what do i return?
+    return true
 
 }
 
