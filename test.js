@@ -2,35 +2,26 @@ function solve(puzzle) {
 
     for(let row=0; row<9; row++) {
         for(let col=0; col<9; col++) {
-
-            if(puzzle[row][col]===0) {
+           
+            if (puzzle[row][col]===0) {
 
                 for(let num=1; num<=9; num++) {
-
-                    if(isValidPlacement(puzzle, num, row, col)) {
-
-                        puzzle[row][col]=num
-
-                        if(solve(puzzle)) {
-                            return true
-                        } else {
-                            puzzle[row][col]=0
-                        }
-
+                    if(isValidPlacement(puzzle,num,row,col)) {
+                        
                     }
-
                 }
 
-                return false
+                // what to do here? this blank is not matchable if here.
 
             }
 
         }
     }
 
-    return true
+    // what do i return?
 
 }
+
 function isValidPlacement(puzzle, number, row, col) {
 
     for(let i=0; i<9; i++) {
@@ -50,7 +41,18 @@ function isValidPlacement(puzzle, number, row, col) {
     return true
 
 }
-
+function printPuzzle(puzzle) {
+    process.stdout.write("\n")
+    for(row=0;row<9;row++) {
+        for(col=0;col<9;col++) {
+            process.stdout.write( puzzle[row][col].toString() )
+            if (col%3==2 && col!=8) process.stdout.write("|")
+        } 
+        process.stdout.write("\n")
+        if (row%3==2 && row!=8) process.stdout.write("---+---+---\n")
+    }
+    process.stdout.write("\n")
+}
 // why is solve return puzzles with more than 1 solution?
 function testSolveFor1Solution() {
 
@@ -67,7 +69,6 @@ function testSolveFor1Solution() {
     ]
 
     let result = solve(puzzle)
-
     console.log(result)
     printPuzzle(puzzle)
 
