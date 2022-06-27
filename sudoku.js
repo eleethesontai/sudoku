@@ -158,8 +158,32 @@ function getEmptyPuzzle() {
     ]
 }
 
-function main() {
-    let result = generate()
-    printPuzzle(result)
+// why is solve return puzzles with more than 1 solution?
+function testSolveFor1Solution() {
+
+    let puzzle = [
+        [9,0,0,5,8,0,1,2,0],
+        [8,7,1,0,0,0,0,0,0],
+        [0,0,0,0,4,3,0,8,7],   
+        [0,1,8,0,9,0,0,0,0],
+        [4,6,0,3,2,0,8,0,9],
+        [0,0,0,7,0,8,6,0,0],  
+        [7,0,0,0,0,0,0,6,0],
+        [5,0,0,0,0,0,2,0,0],
+        [0,8,0,0,0,0,7,0,4]
+    ]
+
+    let result = solve(puzzle)
+
+    console.log(result)
+    printPuzzle(puzzle)
+
 }
-main()
+
+testSolveFor1Solution()
+
+// function main() {
+//     let result = generate()
+//     printPuzzle(result)
+// }
+// main()
