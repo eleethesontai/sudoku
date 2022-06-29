@@ -2,27 +2,19 @@ function solve(puzzle) {
 
     for(let row=0; row<9; row++) {
         for(let col=0; col<9; col++) {
-
             if (puzzle[row][col]===0) {
-                
                 for(let num=1; num<=9; num++) {
                     if(isValidPlacement(puzzle,num,row,col)) {
                         puzzle[row][col]=num
-                        if(solve(puzzle)) {
-                            return true
-                        } else {
-                            puzzle[row][col]=0
-                        }
+                        if(solve(puzzle)) {console.log('true2');return true}
+                        else puzzle[row][col]=0
                     }
                 }
-
                 return false
-
             }
-
         }
     }
-
+    console.log('true1')
     return true
 
 }
@@ -69,15 +61,15 @@ function printPuzzle(puzzle) {
 }
 
 let puzzle = [
-    [3,0,0,2,0,0,0,0,0],
-    [0,0,0,1,0,7,0,0,0],
-    [7,0,6,0,3,0,5,0,0],
-    [0,7,0,0,0,9,0,8,0],
-    [9,0,0,0,2,0,0,0,4],
-    [0,1,0,8,0,0,0,5,0],
-    [0,0,9,0,4,0,3,0,1],
-    [0,0,0,7,0,2,0,0,0],
-    [0,0,0,0,0,8,0,0,6]   
+    [9,0,0,5,8,0,1,2,0],
+    [8,7,1,0,0,0,0,0,0],
+    [0,0,0,0,4,3,0,8,7],   
+    [0,1,8,0,9,0,0,0,0],
+    [4,6,0,3,2,0,8,0,9],
+    [0,0,0,7,0,8,6,0,0],  
+    [7,0,0,0,0,0,0,6,0],
+    [5,0,0,0,0,0,2,0,0],
+    [0,8,0,0,0,0,7,0,4]
 ]
 
 let result = solve(puzzle)
