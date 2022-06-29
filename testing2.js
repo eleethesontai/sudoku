@@ -50,21 +50,19 @@ function format(puzzle) {
             .join('')       
     return result
 }
+function printPuzzle(puzzle) {
+    process.stdout.write("\n")
+    for(row=0;row<9;row++) {
+        for(col=0;col<9;col++) {
+            process.stdout.write( puzzle[row][col].toString() )
+            if (col%3==2 && col!=8) process.stdout.write("|")
+        } 
+        process.stdout.write("\n")
+        if (row%3==2 && row!=8) process.stdout.write("---+---+---\n")
+    }
+    process.stdout.write("\n")
+}
 
-// this is the puzzle with 66 sols
-// let puzzle = [
-//     [9,0,0,5,8,0,1,2,0],
-//     [8,7,1,0,0,0,0,0,0],
-//     [0,0,0,0,4,3,0,8,7],   
-//     [0,1,8,0,9,0,0,0,0],
-//     [4,6,0,3,2,0,8,0,9],
-//     [0,0,0,7,0,8,6,0,0],  
-//     [7,0,0,0,0,0,0,6,0],
-//     [5,0,0,0,0,0,2,0,0],
-//     [0,8,0,0,0,0,7,0,4]
-// ]
-
-// grid 50 from p096_sudoku.txt
 let puzzle = [
     [3,0,0,2,0,0,0,0,0],
     [0,0,0,1,0,7,0,0,0],
@@ -78,5 +76,5 @@ let puzzle = [
 ]
 
 let result = solve(puzzle)
-let formatted = format(puzzle)
-console.log('\n'+result, formatted)
+console.log(result)
+printPuzzle(puzzle)
