@@ -2,7 +2,9 @@ function solve(puzzle) {
 
     for(let row=0; row<9; row++) {
         for(let col=0; col<9; col++) {
+
             if (puzzle[row][col]===0) {
+                
                 for(let num=1; num<=9; num++) {
                     if(isValidPlacement(puzzle,num,row,col)) {
                         puzzle[row][col]=num
@@ -12,9 +14,12 @@ function solve(puzzle) {
                             puzzle[row][col]=0
                         }
                     }
-                    return false
                 }
+
+                return false
+
             }
+
         }
     }
 
