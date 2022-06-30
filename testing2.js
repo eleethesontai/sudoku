@@ -1,21 +1,23 @@
 function solve(puzzle) {
 
-    for(let row=0; row<9; row++) {
-        for(let col=0; col<9; col++) {
-            if (puzzle[row][col]===0) {
-                for(let num=1; num<=9; num++) {
+    let solutions = []
+
+    for(let row=0;row<9;row++) {
+        for(let col=0;col<9;col++) {
+            if(puzzle[row][col]===0) {
+                for(let num=1;num<=9;num++) {
                     if(isValidPlacement(puzzle,num,row,col)) {
-                        puzzle[row][col]=num
-                        if(solve(puzzle)) {console.log('true2');return true}
-                        else puzzle[row][col]=0
+
                     }
                 }
-                return false
             }
         }
     }
-    console.log('true1')
-    return true
+
+    return solutions
+
+}
+function _solve() {
 
 }
 
@@ -60,10 +62,10 @@ function printPuzzle(puzzle) {
     process.stdout.write("\n")
 }
 
-let puzzle = [
+let test = [
     [9,0,0,5,8,0,1,2,0],
     [8,7,1,0,0,0,0,0,0],
-    [0,0,0,0,4,3,0,8,7],   
+    [0,0,0,0,4,3,0,8,7], 
     [0,1,8,0,9,0,0,0,0],
     [4,6,0,3,2,0,8,0,9],
     [0,0,0,7,0,8,6,0,0],  
@@ -72,6 +74,5 @@ let puzzle = [
     [0,8,0,0,0,0,7,0,4]
 ]
 
-let result = solve(puzzle)
+let result = solve(test,0,1)
 console.log(result)
-printPuzzle(puzzle)
