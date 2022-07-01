@@ -4,3 +4,5 @@ let test = [
     [0,0,3,0],
     [0,0,0,4]
 ]
+
+console.log(test)
