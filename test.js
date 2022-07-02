@@ -42,8 +42,8 @@ function isValid(puzzle,num,row,col) {
 let test = [
     [1,2,0,4],
     [0,0,0,1],
-    [0,0,0,3],
-    [3,0,0,0]
+    [0,0,0,0],
+    [0,0,0,0]
 ] 
 
 let result = solve(test)
