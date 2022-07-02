@@ -1,22 +1,35 @@
-// script to generate all possible 4x4 sudoku puzzles
-// what is the base case for the recursion?
+const GRID_SIZE=4
 
+// base case is puzzzle with no zeros????
+let results = []
+let iteration = 0
 function solve(puzzle) {
-    for(let r=0;r<4;r++) {
-        for(let c=0;c<4;c++) {
-            if(puzzle[r][c]===0) {
-                for(let n=1;n<=4;n++) {
-                    if(isValid(puzzle,n,r,c,)) {
-                        puzzle[r][c]=n
-                        if(solve(puzzle)) return true
-                        puzzle[r][c]=0
+
+    iteration++
+    for(let row=0;row<4;row++) {
+        for(let col=0;col<4;col++) {
+            
+            if(puzzle[row][col]===0) {
+                
+                for(let num=1;num<=4;num++) {
+                    if(isValid(puzzle,num,row,col)) {
+
+                        puzzle[row][col]=num
+                        if(solve(puzzle)===1) return 1
+                        puzzle[row][col]=0
+
                     }
                 }
-                return false
+
+                return 0
+
             }
+
         }
     }
-    return true
+
+    return 1
+
 }
 
 function isValid(puzzle,num,row,col) {
@@ -40,11 +53,13 @@ function isValid(puzzle,num,row,col) {
 }
 
 let test = [
-    [1,2,0,4],
+    [1,2,3,4],
     [0,0,0,1],
-    [0,0,0,0],
-    [0,0,0,0]
-] 
+    [0,0,0,2],
+    [0,0,0,3]
+]
 
 let result = solve(test)
-console.log(result,test.map(r=>r.join('')).join(''))
+console.log('result:    ', result)
+console.log('iteration: ', iteration)
+console.log('length:    ', results.length)
