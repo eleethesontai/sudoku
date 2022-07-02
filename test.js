@@ -18,18 +18,32 @@ function solve(puzzle) {
     }
     return true
 }
+
 function isValid(puzzle,num,row,col) {
-    for(let i=0;i<4;i++) {
-        
+    
+    for(let i=0; i<4; i++) {
+        if (puzzle[row][i]===num) return false
+        if (puzzle[i][col]===num) return false
     }
+
+    boxRow=row-row%2
+    boxCol=col-col%2
+
+    for(x=boxRow;x<boxRow+2;x++) {
+        for(y=boxCol;y<boxCol+2;y++) {
+            if(puzzle[x][y]===num) return false
+        }
+    }
+
     return true
+
 }
 
 let test = [
-    [1,2,3,4],
-    [4,3,2,1],
-    [2,1,4,3],
-    [3,4,1,2]
+    [1,2,0,4],
+    [0,0,0,1],
+    [0,0,0,3],
+    [3,0,0,0]
 ] 
 
 let result = solve(test)
