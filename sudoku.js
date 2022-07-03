@@ -10,7 +10,7 @@ function solve(puzzle) {
 
                         puzzle[row][col]=num
 
-                        if(solve(puzzle)==1) {
+                        if(solve(puzzle)) {
                             return true
                         } else {
                             puzzle[row][col]=num
