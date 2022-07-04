@@ -1,44 +1,38 @@
 const GRID_SIZE = 4
-let test = [
-    [1,4,2,3],
-    [3,2,0,0],
-    [0,0,3,0],
-    [0,0,0,0] 
-]
 
-// [1,2] can be 1 or 4
-// [2,0] can be 2 or 4 if [1,2] is a 4
-
-let iteration = -1
-let results = []
 function solve(grid) {
 
-    iteration++
-    for(let row=0; row<GRID_SIZE; row++) {
-        for(let col=0; col<GRID_SIZE; col++) {
-
-            if(grid[row][col]===0) {
-                
-                for(let num=1; num<=GRID_SIZE; num++) {
-                    if(isValid(grid,row,col,num)) {
-                        
-                        grid[row][col] = num
-                        
-                        if(solve(grid)) {
-                            return true
-                        }
-
-                        grid[row][col] = 0
-
-                    }
-                }
-
-                return false
-
+    let enumerateGrid = (callback) => {
+        for(let x=0;x<GRID_SIZE;x++) {
+            for(let y=0;y<GRID_SIZE;y++) {
+                callback(x,y)
             }
-
         }
     }
+    let enumerateCanidates = (callback) => {
+        for(let i=1;i<=GRID_SIZE;i++) {
+            callback(i)
+        }
+    }
+
+    enumerateGrid((row,col) => {
+        if(grid[row][col]===0) {
+            enumerateCanidates(canidate => {
+                if(isValid(grid,row,col,canidate)) {
+
+                    grid[row][col] = canidate
+                    
+                    if(solve(grid)) {
+                        return true
+                    }
+
+                    grid[row][col] = 0
+
+                }
+            })
+            return false
+        }
+    })
 
     return true
 
@@ -64,7 +58,13 @@ function isValid(grid,row,col,num) {
 
 }
 
-let result = solve(test)
-console.log(result, results.length)
-results
-    .map(r=>console.log(r))
+let test = [
+    [1,4,2,3],
+    [3,2,0,0],
+    [0,0,3,0],
+    [0,0,0,0] 
+]
+
+let results = solve(test)
+console.log(results)
+console.table(test)
