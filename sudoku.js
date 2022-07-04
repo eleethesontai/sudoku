@@ -2,37 +2,24 @@ const GRID_SIZE = 4
 
 function solve(grid) {
 
-    let enumerateGrid = (callback) => {
-        for(let x=0;x<GRID_SIZE;x++) {
-            for(let y=0;y<GRID_SIZE;y++) {
-                callback(x,y)
-            }
-        }
-    }
-    let enumerateCanidates = (callback) => {
-        for(let i=1;i<=GRID_SIZE;i++) {
-            callback(i)
-        }
-    }
+    for(let row=0; row<GRID_SIZE; row++) {
+        for(let col=0; col<GRID_SIZE; col++) {
 
-    enumerateGrid((row,col) => {
-        if(grid[row][col]===0) {
-            enumerateCanidates(canidate => {
-                if(isValid(grid,row,col,canidate)) {
-
-                    grid[row][col] = canidate
-                    
-                    if(solve(grid)) {
-                        return true
+            if(grid[row][col]===0) {
+                for(let num=1;num<=GRID_SIZE;num++) {
+                    if(isValid(grid,row,col,num)) {
+                        grid[row][col]=num
+                        if(solve(grid)) {
+                            return true
+                        }
+                        grid[row][col]=0
                     }
-
-                    grid[row][col] = 0
-
                 }
-            })
-            return false
+                return false
+            }
+
         }
-    })
+    }
 
     return true
 
@@ -58,13 +45,13 @@ function isValid(grid,row,col,num) {
 
 }
 
-let test = [
+let sample = [
     [1,4,2,3],
     [3,2,0,0],
-    [0,0,3,0],
+    [0,0,0,0],
     [0,0,0,0] 
 ]
 
-let results = solve(test)
+let results = solve(sample)
 console.log(results)
-console.table(test)
+console.table(sample)
