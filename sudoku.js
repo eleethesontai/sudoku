@@ -6,16 +6,22 @@ function solve(grid) {
         for(let col=0; col<GRID_SIZE; col++) {
 
             if(grid[row][col]===0) {
-                for(let num=1;num<=GRID_SIZE;num++) {
+
+                for(let num=1; num<=GRID_SIZE; num++) {
                     if(isValid(grid,row,col,num)) {
+
                         grid[row][col]=num
                         if(solve(grid)) {
                             return true
                         }
+
                         grid[row][col]=0
+
                     }
                 }
+
                 return false
+
             }
 
         }
@@ -45,13 +51,10 @@ function isValid(grid,row,col,num) {
 
 }
 
-let sample = [
-    [1,4,2,3],
-    [3,2,0,0],
-    [0,0,0,0],
-    [0,0,0,0] 
-]
+function main() {
 
-let results = solve(sample)
-console.log(results)
-console.table(sample)
+    let solved = solve([[1,4,2,3],[3,2,0,0],[0,0,0,0],[0,0,0,0]])
+    console.log('solved:    ',solved)
+
+}
+main()
