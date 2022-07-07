@@ -1,4 +1,5 @@
 const GRID_SIZE = 4
+const stack = []
 
 function solve(grid) {
 
@@ -30,7 +31,6 @@ function solve(grid) {
     return true
 
 }
-
 function isValid(grid,row,col,num) {
         
     for(let i=0; i<4; i++) {
@@ -51,10 +51,4 @@ function isValid(grid,row,col,num) {
 
 }
 
-function main() {
-
-    let solved = solve([[1,4,2,3],[3,2,0,0],[0,0,0,0],[0,0,0,0]])
-    console.log('solved:    ',solved)
-
-}
-main()
+let sample = [[1,4,2,3],[3,2,1,4],[0,0,0,0],[0,0,0,0]]
