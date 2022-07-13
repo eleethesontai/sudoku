@@ -26,7 +26,9 @@ function valid(grid,index,canidate) {
 function solve(grid) {
 
     let results = []
-    let stack = [grid]
+    let stack = [[...grid]]
+
+    console.log(stack[0]===grid)
 
     while(stack.length>0) {
 
@@ -39,7 +41,7 @@ function solve(grid) {
             for(let canidate=1; canidate<=4; canidate++) {
                 if(valid(current,index,canidate)) {
                     current[index] = canidate
-                    stack.push(current) 
+                    stack.push([...current]) 
                     current[index] = 0
                 }
             }
@@ -52,11 +54,13 @@ function solve(grid) {
 }
 
 let sample = [
-    1,2,3,4,
-    4,3,2,1,
-    3,4,0,2,
-    2,1,4,3
+    4,2,1,3,
+    1,3,2,4,
+    0,0,0,0,
+    0,0,0,0
 ]
 
-let results = solve(sample) 
-console.log(results)
+let results = solve(sample)
+// results
+//     .forEach(r=>console.log(r.join('')))
+console.log(results.length)
