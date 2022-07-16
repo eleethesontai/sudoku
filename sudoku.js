@@ -1,42 +1,25 @@
-function getHouses(size) {
+function valid(grid,index,canidate,size) {
 
-    let results = {}
     let root = size**(1/2)
     let scale = size-root
+    let row = Math.floor(index/size)
+    let col = index%size
+    let box = (col-col%root)+(row-row%root)*size
 
-    for(let x=0; x<size**2; x++) {
-        
-        results[x] = new Set()
+    for(let cell=0; cell<size; cell++) {
 
-        let row = Math.floor(x/size)
-        let col = x%size
-        let box = (col-col%root)+(row-row%root)*size
+        let r = row*size+cell
+        let c = col+cell*size
+        let b = box+cell+Math.floor(cell/root)*scale
 
-        for(let y=0; y<size; y++) {
-            results[x].add(row*size+y)
-            results[x].add(col+y*size)
-            results[x].add(box+y+Math.floor(y/root)*scale)
-        }
+        if(grid[r]===canidate) return false
+        if(grid[c]===canidate) return false
+        if(grid[b]===canidate) return false
 
-    }
-
-    return results
-
-}
-
-const houses = getHouses(4)
-function valid(grid,index,canidate) {
-
-    for(const house of houses[index]) {
-        if(grid[house]===canidate) return false
     }
 
     return true
 
-}
-
-function solve(grid) {
-    
 }
 
 let sample = [
