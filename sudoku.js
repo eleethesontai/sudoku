@@ -22,9 +22,41 @@ function valid(grid,index,canidate,size) {
 
 }
 
+function solve(grid,size) {
+
+    let results = []
+    let stack = [[...grid]]
+
+    while(stack.length>0) {
+        
+        let current = stack.pop()
+        let index = current.indexOf(0)
+
+        if(index===-1) {
+            results.push[[...current]]
+        } 
+        else {
+            for(let canidate=1; canidate<=size; canidate++) {
+                if(valid(current,index,canidate)) {
+                    current[index]=canidate
+                    stack.push([...current])
+                    current[index]=0
+                }
+            }
+        }
+
+    }
+
+    return results
+
+}
+
 let sample = [
     1,2,3,4,
     4,3,2,1,
     0,1,0,0,
     0,0,0,0
 ]
+
+let solutions = solve(sample,4)
+console.log(solutions)
