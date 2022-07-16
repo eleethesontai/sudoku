@@ -2,7 +2,7 @@ function getHouses(size) {
 
     let results = {}
     let root = size**(1/2)
-    let scale = size-size1
+    let scale = size-root
 
     for(let x=0; x<size**2; x++) {
         
@@ -24,5 +24,21 @@ function getHouses(size) {
 
 }
 
-let houses = getHouses(9)
-console.log(houses)
+let houses = getHouses(4)
+
+function valid(grid,index,canidate) {
+
+    for(const house of houses[index]) {
+        if(grid[house]===canidate) return false
+    }
+
+    return true
+
+}
+
+let sample = [
+    1,2,3,4,
+    4,3,2,1,
+    0,1,0,0,
+    0,0,0,0
+]
