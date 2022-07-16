@@ -24,8 +24,7 @@ function getHouses(size) {
 
 }
 
-let houses = getHouses(4)
-
+const houses = getHouses(4)
 function valid(grid,index,canidate) {
 
     for(const house of houses[index]) {
@@ -34,6 +33,10 @@ function valid(grid,index,canidate) {
 
     return true
 
+}
+
+function solve(grid) {
+    
 }
 
 let sample = [
