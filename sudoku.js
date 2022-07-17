@@ -22,29 +22,6 @@ function valid(grid,index,canidate,size) {
 
 }
 
-function randomCanidates(size) {
-    
-    let results = new Set()
-
-    while(results.size<size) {
-        results.add(Math.floor(Math.random() * size) + 1)
-    }
-
-    return results
-
-}
-
-function generate(size) {
-
-    let result = []
-
-    for(let i=0; i<size**2; i++) {
-        result[i] = 0    
-    }
-
-    return result
-
-}
 function solve(grid,size) {
 
     let results = []
@@ -73,6 +50,3 @@ function solve(grid,size) {
     return results
 
 }
-
-module.exports.generate = generate
-module.exports.solve = solve
