@@ -22,25 +22,74 @@ function valid(grid,index,canidate,size) {
 
 }
 
-function solve(grid,size) {
+function getRandomCanidates(size) {
 
-    let results = []
-    let stack = [[...grid]]
+    let results = new Set
 
-    while(stack.length>0) {
-        let current = stack.pop()
+    while(results.size<size) {
+        results.add(Math.floor(Math.random() * size + 1))
     }
 
     return results
 
 }
 
-let test = [
-    2,2,3,4,
-    4,3,2,1,
-    2,1,4,3,
-    3,4,1,2
-]
+function generate(size) {
 
-let results = solve(test,4)
+    let stack = [Array.from(Array(size**2).keys()).fill(0)]
+
+    while(stack.length>0) {
+
+        let current = stack.pop()
+        let index = current.indexOf(0)
+
+        if(index===-1) {
+            return current
+        }
+        else {
+            let canidates = getRandomCanidates(4)
+            for(let canidate of canidates) {
+                if(valid(current,index,canidate,size)) {
+                    current[index]=canidate
+                    stack.push([...current])
+                    current[index]=0                    
+                }
+            }
+        }
+
+    }
+
+}
+function solve(grid,size) {
+
+    let results = []
+    let stack = [[...grid]]
+
+    while(stack.length>0) {
+
+        let current = stack.pop()
+        let index = current.indexOf(0)
+
+        if(index===-1) {
+            results.push([...current])
+        }
+        else {
+            for(let canidate=1; canidate<=size; canidate++) {
+                if(valid(current,index,canidate,size)) {
+                    current[index]=canidate
+                    stack.push([...current])
+                    current[index]=0
+                }
+            }
+        }
+
+    }
+
+    return results
+
+}
+
+let results = generate(4)
 console.log(results)
+
+// console.log(getRandomCanidates(4))
