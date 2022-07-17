@@ -28,25 +28,19 @@ function solve(grid,size) {
     let stack = [[...grid]]
 
     while(stack.length>0) {
-
         let current = stack.pop()
-        let index = current.indexOf(0)
-
-        if(index===-1) {
-            results.push([...current])
-        }
-        else {
-            for(let canidate=1; canidate<=size; canidate++) {
-                if(valid(current,index,canidate,size)) {
-                    current[index]=canidate
-                    stack.push([...current])
-                    current[index]=0
-                }
-            }
-        }
-
     }
 
     return results
 
 }
+
+let test = [
+    2,2,3,4,
+    4,3,2,1,
+    2,1,4,3,
+    3,4,1,2
+]
+
+let results = solve(test,4)
+console.log(results)
