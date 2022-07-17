@@ -21,6 +21,30 @@ function valid(grid,index,canidate,size) {
     return true
 
 }
+
+function randomCanidates(size) {
+    
+    let results = new Set()
+
+    while(results.size<size) {
+        results.add(Math.floor(Math.random() * size) + 1)
+    }
+
+    return results
+
+}
+
+function generate(size) {
+
+    let result = []
+
+    for(let i=0; i<size**2; i++) {
+        result[i] = 0    
+    }
+
+    return result
+
+}
 function solve(grid,size) {
 
     let results = []
@@ -50,13 +74,5 @@ function solve(grid,size) {
 
 }
 
-let sample = [
-    1,2,3,4,
-    4,3,2,1,
-    0,0,0,0,
-    0,0,0,0
-]
-
-let solutions = solve(sample,4)
-solutions
-    .forEach(i=>console.log(i.join('')))
+module.exports.generate = generate
+module.exports.solve = solve
