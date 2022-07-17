@@ -33,11 +33,11 @@ function solve(grid,size) {
         let index = current.indexOf(0)
 
         if(index===-1) {
-            results.push[[...current]]
+            results.push([...current])
         } 
         else {
             for(let canidate=1; canidate<=size; canidate++) {
-                if(valid(current,index,canidate)) {
+                if(valid(current,index,canidate,size)) {
                     current[index]=canidate
                     stack.push([...current])
                     current[index]=0
@@ -51,12 +51,12 @@ function solve(grid,size) {
 
 }
 
-let sample = [
-    1,2,3,4,
-    4,3,2,1,
-    0,1,0,0,
-    0,0,0,0
-]
+// let sample = [
+//     1,2,3,4,
+//     4,3,2,1,
+//     2,0,0,0,
+//     0,0,0,0
+// ]
 
-let solutions = solve(sample,4)
-console.log(solutions)
+// let solutions = solve(sample,4)
+// console.log(solutions)
