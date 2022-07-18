@@ -1,16 +1,18 @@
-function valid(grid,index,canidate,size) {
+const GRID_SIZE = 9
 
-    let row = Math.floor(index/size) 
-    let col = index%size
-    let root = size**(1/2)
-    let scale = size-root
-    let box = (col-col%root) + (row-row%root) * size
+function isValidPlacement(grid,index,canidate) {
+
+    let row = Math.floor(index/GRID_SIZE) 
+    let col = index%GRID_SIZE
+    let root = GRID_SIZE**(1/2)
+    let scale = GRID_SIZE-root
+    let box = (col-col%root) + (row-row%root) * GRID_SIZE
 
     let results = new Set()
 
-    for(let i=0; i<size; i++) {
-        results.add(row*size+i)
-        results.add(col+i*size)
+    for(let i=0; i<GRID_SIZE; i++) {
+        results.add(row*GRID_SIZE+i)
+        results.add(col+i*GRID_SIZE)
         results.add(box+i+Math.floor(i/root)*scale)
     }
 
@@ -23,40 +25,7 @@ function valid(grid,index,canidate,size) {
     return true
 
 }
-
-function generate(size) {
-
-    let getCanidates = () => {
-        let results = new Set
-        while(results.size<size) 
-            results.add(Math.floor(Math.random() * size + 1))
-        return results
-    }
-    let stack = [Array.from(Array(size**2).keys()).fill(0)]
-
-    while(stack.length>0) {
-
-        let current = stack.pop()
-        let index = current.indexOf(0)
-
-        if(index===-1) {
-            return current
-        }
-        else {
-            let canidates = getCanidates(size)
-            for(let canidate of canidates) {
-                if(valid(current,index,canidate,size)) {
-                    current[index]=canidate
-                    stack.push([...current])
-                    current[index]=0                    
-                }
-            }
-        }
-
-    }
-
-}
-function solve(grid,size) {
+function getSolutions(grid) {
 
     let results = []
     let stack = [[...grid]]
@@ -70,8 +39,8 @@ function solve(grid,size) {
             results.push([...current])
         }
         else {
-            for(let canidate=1; canidate<=size; canidate++) {
-                if(valid(current,index,canidate,size)) {
+            for(let canidate=1; canidate<=GRID_SIZE; canidate++) {
+                if(isValidPlacement(current,index,canidate,GRID_SIZE)) {
                     current[index]=canidate
                     stack.push([...current])
                     current[index]=0
@@ -84,21 +53,70 @@ function solve(grid,size) {
     return results
 
 }
+function getRandomSet(size,min,max) {
 
-/*
+    let results = new Set()
 
-    0,   1,  2,  3,
-    4,   5,  6,  7,
-    8,   9, 10, 11,
-    12, 13, 14, 15
+    while(results.size<size) {
+        results.add(Math.floor(Math.random() * (max - min + 1) + min))
+    }
 
-*/
+    return results
 
-let sample = [
-    1,2,3,4,
-    4,3,2,1,
-    2,1,4,3,
-    3,4,1,2
-]
+}
+function getRandomPuzzle() {
+    
+    let stack = [Array.from(Array(GRID_SIZE**2).keys()).fill(0)]
 
-console.log(valid(sample,10,2,4))
+    while(stack.length>0) {
+
+        let current = stack.pop()
+        let index = current.indexOf(0)
+
+        if(index===-1) {
+            return current
+        }
+        else {
+            let canidates = getRandomSet(GRID_SIZE,1,GRID_SIZE)
+            for(let canidate of canidates) {
+                if(isValidPlacement(current,index,canidate,GRID_SIZE)) {
+                    current[index]=canidate
+                    stack.push([...current])
+                    current[index]=0                    
+                }
+            }
+        }
+
+    } 
+
+}
+function removeRandomClues(grid,count) {
+    
+    let canidates = getRandomSet(count,0,GRID_SIZE**2)
+
+    for(let canidate of canidates) {
+        grid[canidate]=0
+    }
+
+    return grid
+
+}
+
+function generate(blank) {
+    
+    let puzzle = getRandomPuzzle()
+
+    while(1===1) {
+        let current = removeRandomClues([...puzzle],blank)
+        let solutions = getSolutions(current)
+        if(solutions.length===1) {
+            return {
+                puzzle: current,
+                solution: solutions
+            }
+        }
+    }
+
+}
+
+module.exports.generate = generate
