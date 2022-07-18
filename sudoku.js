@@ -12,7 +12,7 @@ function getRandomCanidates(size) {
 
 
 function valid(grid,index,canidate,size) {
-
+    console.log('here')
     let root = size**(1/2)
     let scale = size-root
     let row = Math.floor(index/size)
