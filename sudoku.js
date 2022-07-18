@@ -1,3 +1,16 @@
+function getRandomCanidates(size) {
+
+    let results = new Set
+
+    while(results.size<size) {
+        results.add(Math.floor(Math.random() * size + 1))
+    }
+
+    return results
+
+}
+
+
 function valid(grid,index,canidate,size) {
 
     let root = size**(1/2)
@@ -22,19 +35,7 @@ function valid(grid,index,canidate,size) {
 
 }
 
-function getRandomCanidates(size) {
-
-    let results = new Set
-
-    while(results.size<size) {
-        results.add(Math.floor(Math.random() * size + 1))
-    }
-
-    return results
-
-}
-
-function generate(size) {
+function _generate(size) {
 
     let stack = [Array.from(Array(size**2).keys()).fill(0)]
 
@@ -47,7 +48,7 @@ function generate(size) {
             return current
         }
         else {
-            let canidates = getRandomCanidates(4)
+            let canidates = getRandomCanidates(size)
             for(let canidate of canidates) {
                 if(valid(current,index,canidate,size)) {
                     current[index]=canidate
@@ -60,6 +61,7 @@ function generate(size) {
     }
 
 }
+
 function solve(grid,size) {
 
     let results = []
@@ -89,7 +91,9 @@ function solve(grid,size) {
 
 }
 
-let results = generate(4)
-console.log(results)
-
-// console.log(getRandomCanidates(4))
+console.log(solve([
+    1,1,3,4,
+    4,3,2,1,
+    3,1,4,2,
+    2,4,1,3    
+],4))
