@@ -11,7 +11,7 @@ function getRandomCanidates(size) {
 }
 
 function valid(grid,index,canidate,size) {
-    console.log('here')
+
     let root = size**(1/2)
     let scale = size-root
     let row = Math.floor(index/size)
@@ -63,6 +63,8 @@ function _generate(size) {
 
 function solve(grid,size) {
 
+    if(!validate(grid,size)) return []
+
     let results = []
     let stack = [[...grid]]
 
@@ -89,3 +91,17 @@ function solve(grid,size) {
     return results
 
 }
+
+function validate(grid,size) {
+    return true
+}
+
+let sample = [
+    0,0,0,0,
+    0,0,0,0,
+    2,0,4,0,
+    3,0,1,0
+]
+
+let results = solve(sample,4) 
+console.log(results)
