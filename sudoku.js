@@ -1,23 +1,23 @@
 function valid(grid,index,canidate,size) {
 
+    let row = Math.floor(index/size) 
+    let col = index%size
     let root = size**(1/2)
     let scale = size-root
-    let row = Math.floor(index/size)
-    let col = index%size
-    let box = (col-col%root)+(row-row%root)*size
+    let box = (col-col%root) + (row-row%root) * size
 
-    for(let cell=0; cell<size; cell++) {
+    let results = new Set()
 
-        let r = row*size+cell
-        let c = col+cell*size
-        let b = box+cell+Math.floor(cell/root)*scale
+    for(let i=0; i<size; i++) {
+        results.add(row*size+i)
+        results.add(col+i*size)
+        results.add(box+i+Math.floor(i/root)*scale)
+    }
 
-        if(r===index || c===index || b===index) return true
+    results.delete(index)
 
-        if(grid[r]===canidate) return false
-        if(grid[c]===canidate) return false
-        if(grid[b]===canidate) return false
-
+    for(let result of results) {
+        if(result===canidate) return false
     }
 
     return true
@@ -58,8 +58,6 @@ function generate(size) {
 }
 function solve(grid,size) {
 
-    if(!validate(grid,size)) return []
-
     let results = []
     let stack = [[...grid]]
 
@@ -87,6 +85,15 @@ function solve(grid,size) {
 
 }
 
+/*
+
+    0,   1,  2,  3,
+    4,   5,  6,  7,
+    8,   9, 10, 11,
+    12, 13, 14, 15
+
+*/
+
 let sample = [
     1,2,3,4,
     4,3,2,1,
@@ -94,4 +101,4 @@ let sample = [
     3,4,1,2
 ]
 
-console.log(valid(sample,0,2,4))
+console.log(valid(sample,10,2,4))
