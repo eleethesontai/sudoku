@@ -17,7 +17,7 @@ function valid(grid,index,canidate,size) {
     results.delete(index)
 
     for(let result of results) {
-        if(result===canidate) return false
+        if(grid[result]===canidate) return false
     }
 
     return true
