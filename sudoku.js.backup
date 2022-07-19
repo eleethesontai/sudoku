@@ -82,7 +82,7 @@ function getRandomPuzzle() {
                 if(isValidPlacement(current,index,canidate,GRID_SIZE)) {
                     current[index]=canidate
                     stack.push([...current])
-                    current[index]=0         
+                    current[index]=0                    
                 }
             }
         }
@@ -91,7 +91,7 @@ function getRandomPuzzle() {
 
 }
 function removeRandomClues(grid,count) {
-
+    
     let canidates = getRandomSet(count,0,GRID_SIZE**2)
 
     for(let canidate of canidates) {
@@ -104,33 +104,19 @@ function removeRandomClues(grid,count) {
 
 function generate(blank) {
     
+    let puzzle = getRandomPuzzle()
+
     while(1===1) {
-        let current = removeRandomClues(getRandomPuzzle(),64)
+        let current = removeRandomClues([...puzzle],blank)
         let solutions = getSolutions(current)
         if(solutions.length===1) {
             return {
                 puzzle: current,
-                solution: solutions[0]
+                solution: solutions
             }
         }
     }
 
 }
 
-function test(sample,callback) {
-   
-    let start = new Date()
-
-    for(let i=0; i<100; i++) {
-        callback()
-    }
-
-    let end = new Date()
-    let duration = end -start
-    console.log(duration) 
-
-}
-
-let results = removeRandomClues(getRandomPuzzle(),50)
-let solutions = getSolutions(results)
-console.log(results,solutions)
+module.exports.generate = generate
