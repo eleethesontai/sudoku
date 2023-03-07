@@ -1,0 +1,18 @@
+/* board */
+#board {
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    grid-template-rows: repeat(9,1fr);
+    aspect-ratio: 1/1;
+    max-height: 100vh;
+}
+
+.cell {
+    background-color: #1e1e1e;
+    border: 2px solid black;
+    position: relative;
+}
+
+.cell.active {
+    background-color: rebeccapurple;
+}
