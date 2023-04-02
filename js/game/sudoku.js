@@ -35,6 +35,6 @@ export function solve(puzzle) {
 }
 
 export function generate() {
-    var rand = 7
+    var rand = 49
     return puzzles[rand].split('').map(x=>parseInt(x))
 }

@@ -13,6 +13,34 @@
     position: relative;
 }
 
-.cell.active {
-    background-color: rebeccapurple;
+.border1 {border-bottom: 5px solid black;}
+.border2 {border-right: 5px solid black;}
+
+.cell.active {background-color: rgb(64,64,64);}
+.cell.given {color: steelblue;}
+.cell.wrong {color: orangered;}
+
+.value {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
 }
+
+.canidates {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+}
+
+.canidate {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canidate.selected {visibility: visible;}

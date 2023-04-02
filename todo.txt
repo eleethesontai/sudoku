@@ -1,0 +1,7 @@
+- cascade canidates on value change
+- mechanism to persist history of games
+- show seen / selected on click
+- count clicks
+- count mistakes
+
+- add actions and onKeypad
