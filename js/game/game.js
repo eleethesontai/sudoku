@@ -88,9 +88,19 @@ function active() {
     return current.cells.filter(x=>x.is_active)
 }
 function foo(callback, rollback=false) {
+    if(rollback) {
+        var restore = current.cells.map(x => {
+            return {
+                value: x.value,
+                canidates: [...x.canidates]
+            }
+        })
+        current.undo.push(restore)
+    }
     callback()
     renderBoard()
 }
+
 
 function onCellClick(cell, shift) {
     foo(() => {
@@ -130,9 +140,18 @@ function onEraseButtonClick() {
             })
     }, true)
 }
-function onUndoButtonClick() {}
-function onNotesButtonClick() {}
-function onNewButtonClick() {}
+function onUndoButtonClick() {
+    foo(() => {
+        if(current.undo.length!=0) {
+            var restore = current.undo.pop()
+            restore
+                .forEach((v,i) => {
+                    current.cells[i].value = v.value
+                    current.cells[i].canidates = v.canidates
+                })
+        }
+    }, false)
+}
 
 window
     .addEventListener('keypress', e => {
